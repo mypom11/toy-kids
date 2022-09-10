@@ -10,6 +10,28 @@ const userSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  phone: {
+    type: Number,
+    required: true,
+  },
+  lead: [
+    {
+      productId: {
+        type: String,
+      },
+      registDate: {
+        type: Date,
+      },
+      returnDate: {
+        type: String,
+      },
+    },
+  ],
   password: {
     type: String,
     required: true,

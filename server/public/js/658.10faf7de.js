@@ -1,2 +1,2 @@
 "use strict";(self["webpackChunkclient"]=self["webpackChunkclient"]||[]).push([[658],{9658:function(n,e,r){r.r(e),r.d(e,{default:function(){return d}});var t=r(3396);function a(n,e,r,a,c,u){return(0,t.wg)(),(0,t.iD)("div")}var c={name:"AdminDashboard"},u=r(89);const i=(0,u.Z)(c,[["render",a],["__scopeId","data-v-9354f454"]]);var d=i}}]);
-//# sourceMappingURL=658.403e35f1.js.map
+//# sourceMappingURL=658.10faf7de.js.map

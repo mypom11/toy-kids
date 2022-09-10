@@ -27,16 +27,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>2022.08.30</td>
-              <td>장난감1</td>
-              <td>퍼즐</td>
-              <td>0 ~ 36개월</td>
+            <tr v-for="(list, i) in productList" :key="i">
+              <td>{{ i + 1 }}</td>
+              <td>{{ setDate(list.registDate) }}</td>
+              <td>{{ list.name }}</td>
+              <td>{{ list.gerne }}</td>
+              <td>{{ list.ages }}</td>
               <td>비대여</td>
               <td>-</td>
-              <td>3회</td>
-              <td>10개</td>
+              <td>{{ list.like }}회</td>
+              <td>{{ list.comment.length }}개</td>
               <td class="link">
                 <p>출력 하기</p>
               </td>
@@ -59,10 +59,27 @@
 import InputCustom from "@/components/InputCustom.vue";
 import Pagination from "../../../components/Pagination.vue";
 import SelectCustom from "@/components/SelectCustom.vue";
+import { getProductList } from "@/api/product";
+import { _setDate } from "@/common/common";
 
 export default {
   name: "AdminProduct",
   components: { InputCustom, Pagination, SelectCustom },
+  created() {
+    this.getProductList();
+  },
+  data() {
+    return {
+      productList: null,
+      setDate: _setDate,
+    };
+  },
+  methods: {
+    async getProductList() {
+      this.productList = await getProductList();
+      console.log(this.productList);
+    },
+  },
 };
 </script>
 
