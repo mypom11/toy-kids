@@ -48,7 +48,9 @@
         </table>
       </div>
       <div class="text-right mt-20">
-        <button class="btn">상품 등록</button>
+        <button class="btn" @click="$router.push({ name: 'AdminProductAdd' })">
+          상품 등록
+        </button>
       </div>
       <Pagination />
     </article>

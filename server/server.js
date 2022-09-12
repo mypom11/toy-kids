@@ -22,6 +22,8 @@ app.use('/api/user', userRoutes);
 app.use('/api/product', productRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/upload', express.static('upload'));
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });

@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <li v-for="(nav, i) in $store.state.admin.adminNav" :key="i">
-          <router-link :to="nav.link">
+          <router-link :to="{ name: nav.link }">
             <div>
               <div class="icons">
                 <font-awesome-icon :icon="['fas', `${nav.icon}`]" />

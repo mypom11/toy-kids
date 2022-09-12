@@ -39,6 +39,14 @@ const routes = [
         },
       },
       {
+        path: "product/add",
+        name: "AdminProductAdd",
+        component: () => import("../pages/admin/product/AdminProductAdd.vue"),
+        meta: {
+          title: "상품 등록",
+        },
+      },
+      {
         path: "notice",
         name: "AdminNotice",
         component: () => import("../pages/admin/notice/AdminNotice.vue"),

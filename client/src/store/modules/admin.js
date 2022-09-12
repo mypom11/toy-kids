@@ -4,27 +4,27 @@ export const admin = {
     adminNav: [
       {
         title: "대시보드",
-        link: "dashboard",
+        link: "Dashboard",
         icon: "chart-simple",
       },
       {
         title: "사용자 관리",
-        link: "user",
+        link: "AdminUser",
         icon: "user",
       },
       {
         title: "상품 관리",
-        link: "product",
+        link: "AdminProduct",
         icon: "gift",
       },
       {
         title: "공지사항",
-        link: "notice",
+        link: "AdminNotice",
         icon: "flag",
       },
       {
         title: "카테고리 관리",
-        link: "category",
+        link: "Category",
         icon: "gear",
       },
     ],
