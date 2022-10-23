@@ -7,6 +7,8 @@ import path from 'path';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';
 import productRoutes from './routes/productRoutes.js';
+import categoryRoutes from './routes/cateRoutes.js';
+import noticeRoutes from './routes/noticeRoutes.js';
 
 const __dirname = path.resolve();
 dotenv.config();
@@ -20,6 +22,8 @@ app.use(cors());
 // route 연결
 app.use('/api/user', userRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/category', categoryRoutes);
+app.use('/api/notice', noticeRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/upload', express.static('upload'));

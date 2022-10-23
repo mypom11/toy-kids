@@ -3,6 +3,7 @@ import path from 'path';
 
 const fileFilter = (req, file, cb) => {
   // 확장자 필터링
+  console.log('test');
   if (
     file.mimetype === 'image/png' ||
     file.mimetype === 'image/jpg' ||
@@ -15,6 +16,22 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
+
+export const detailUpload = multer({
+  storage: multer.diskStorage({
+    // 폴더위치 지정
+    destination: (req, file, done) => {
+      done(null, './upload/productDetail');
+    },
+    filename: (req, file, done) => {
+      const ext = path.extname(file.originalname);
+      // aaa.txt => aaa+&&+129371271654.txt
+      const fileName = `productDetail${Date.now()}${ext}`;
+      done(null, fileName);
+    },
+  }),
+  fileFilter,
+});
 
 export const thumbnailUpload = multer({
   storage: multer.diskStorage({
@@ -30,19 +47,18 @@ export const thumbnailUpload = multer({
     },
   }),
   fileFilter,
-  limits: { fileSize: 30 * 500 * 500 },
 });
 
-export const detailUpload = multer({
+export const noticeUpload = multer({
   storage: multer.diskStorage({
     // 폴더위치 지정
     destination: (req, file, done) => {
-      done(null, './upload/productDetail');
+      done(null, './upload/notice');
     },
     filename: (req, file, done) => {
       const ext = path.extname(file.originalname);
       // aaa.txt => aaa+&&+129371271654.txt
-      const fileName = `productDetail${Date.now()}${ext}`;
+      const fileName = `notice${Date.now()}${ext}`;
       done(null, fileName);
     },
   }),

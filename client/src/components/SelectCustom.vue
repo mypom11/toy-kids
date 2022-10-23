@@ -20,12 +20,8 @@
     </div>
     <div class="dropdown" v-if="isOpen && option != null">
       <ul>
-        <li
-          v-for="(option, i) in option"
-          :key="i"
-          @click="select(option.value)"
-        >
-          {{ option.name }}
+        <li v-for="(option, i) in option" :key="i" @click="select(option._id)">
+          {{ option.subCode }}
         </li>
       </ul>
     </div>
@@ -96,9 +92,10 @@ export default {
     value: function () {
       if (this.modelValue !== null) {
         const selected = this.option.filter(
-          (option) => option.value === this.modelValue
+          (option) => option._id === this.modelValue
         );
-        return selected[0].name;
+        console.log(selected);
+        return selected[0].subCode;
       } else {
         return null;
       }
@@ -116,16 +113,20 @@ $main: $purple-dark;
   &.read {
     input {
       &:read-only {
+        border: none;
         background: rgba($color: $gray, $alpha: 0.1);
       }
+    }
+    .arrow {
+      display: none;
     }
   }
   cursor: pointer;
   input {
     &:read-only {
+      border: 1px solid $gray;
       pointer-events: none;
       background: $white;
-      border: 1px solid rgba($color: $black, $alpha: 0.3);
       height: 32px;
       padding: 6px 15px;
     }

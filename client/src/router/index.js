@@ -55,6 +55,14 @@ const routes = [
         },
       },
       {
+        path: "notice/add",
+        name: "AdminNoticeAdd",
+        component: () => import("../pages/admin/notice/AdminNoticeAdd.vue"),
+        meta: {
+          title: "공지사항 등록",
+        },
+      },
+      {
         path: "category",
         name: "Category",
         component: () => import("../pages/admin/category/Category.vue"),

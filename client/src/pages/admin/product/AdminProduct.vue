@@ -2,8 +2,8 @@
   <section>
     <article class="card">
       <div class="search-box">
-        <SelectCustom place="장르 선택" />
-        <SelectCustom place="사용 나이 선택" />
+        <SelectCustom place="장르 선택" :option="category.gerne" />
+        <SelectCustom place="사용 나이 선택" :option="category.ages" />
         <InputCustom place="상품명을 입력해주세요." />
         <button class="search-btn">
           <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
@@ -31,8 +31,8 @@
               <td>{{ i + 1 }}</td>
               <td>{{ setDate(list.registDate) }}</td>
               <td>{{ list.name }}</td>
-              <td>{{ list.gerne }}</td>
-              <td>{{ list.ages }}</td>
+              <td>{{ getCategory(category.gerne, list.gerne) }}</td>
+              <td>{{ getCategory(category.ages, list.ages) }}</td>
               <td>비대여</td>
               <td>-</td>
               <td>{{ list.like }}회</td>
@@ -41,7 +41,7 @@
                 <p>출력 하기</p>
               </td>
               <td class="link">
-                <p>상세 보기</p>
+                <p @click="openDetail(list._id)">상세 보기</p>
               </td>
             </tr>
           </tbody>
@@ -54,33 +54,61 @@
       </div>
       <Pagination />
     </article>
+    <Transition name="scale">
+      <Modal
+        v-if="detailModal"
+        title="상품 상세 정보"
+        @close="detailModal = false"
+      >
+        <ProductDetail :detail="detail" />
+      </Modal>
+    </Transition>
   </section>
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapState } = createNamespacedHelpers("admin");
+
 import InputCustom from "@/components/InputCustom.vue";
 import Pagination from "../../../components/Pagination.vue";
 import SelectCustom from "@/components/SelectCustom.vue";
-import { getProductList } from "@/api/product";
-import { _setDate } from "@/common/common";
+import { getProductDetail, getProductList } from "@/api/product";
+import { _setDate, _getCategory } from "@/common/common";
+import Modal from "@/components/Modal.vue";
+import ProductDetail from "../../../components/ProductDetail.vue";
 
 export default {
   name: "AdminProduct",
-  components: { InputCustom, Pagination, SelectCustom },
+  components: { InputCustom, Pagination, SelectCustom, Modal, ProductDetail },
   created() {
     this.getProductList();
+    this.$store.dispatch("admin/GET_CATEGORY");
   },
   data() {
     return {
       productList: null,
       setDate: _setDate,
+      detailModal: false,
+      detail: {},
     };
   },
   methods: {
     async getProductList() {
       this.productList = await getProductList();
-      console.log(this.productList);
     },
+    async openDetail(product) {
+      const detailData = await getProductDetail(product);
+      this.detail = detailData;
+      this.detailModal = true;
+    },
+    getCategory(obj, id) {
+      return _getCategory(obj, id);
+    },
+  },
+
+  computed: {
+    ...mapState(["category"]),
   },
 };
 </script>

@@ -62,7 +62,7 @@ export default {
               return new Promise((resolve) => {
                 axios
                   .post(
-                    "http://localhost:4000/api/product/addDetailImg",
+                    "http://localhost:4000/api/notice/addNoticeImg",
                     imgFile
                   )
                   .then((result) => {

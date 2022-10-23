@@ -45,6 +45,10 @@ export default {
 .input-file {
   width: 200px;
   height: 200px;
+  &.sm {
+    width: 140px;
+    height: 140px;
+  }
   input[type="file"] {
     position: absolute;
     width: 1px;
@@ -66,7 +70,7 @@ export default {
     background: rgba($color: $gray, $alpha: 0.1);
     position: relative;
     &.on {
-      border: none;
+      border: 1px solid $gray;
       background: none;
       &:after {
         display: none;
@@ -92,6 +96,7 @@ export default {
       height: auto;
       max-width: 100%;
       max-height: 100%;
+      border-radius: 2px;
     }
   }
 }

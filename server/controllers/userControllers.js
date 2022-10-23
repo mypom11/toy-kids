@@ -59,3 +59,15 @@ export const userLogout = (req, res) => {
     });
   });
 };
+
+export const getUserList = (req, res) => {
+  User.find((err, result) => {
+    if (result.length === 0) {
+      return res.json({
+        success: false,
+        message: '조회된 결과가 없습니다',
+      });
+    }
+    return res.json(result);
+  });
+};

@@ -1,36 +1,25 @@
-import { Product } from '../models/index.js';
+import { Notice } from '../models/index.js';
 
-export const addProductController = (req, res) => {
-  const thumbnail = req.file;
-  console.log(req.file);
-  if (!thumbnail) {
-    return res.json({
-      success: false,
-      message: '파일 업로드에 실패했습니다.',
-    });
-  }
-  const { name, gerne, ages, detail } = req.body;
+export const addNoticeController = (req, res) => {
+  const { title, detail } = req.body;
 
   const registDate = new Date();
   const data = {
-    name,
-    gerne,
-    ages,
-    detail,
+    title,
     registDate,
-    like: 0,
-    thumbnail: `http://localhost:4000/${thumbnail.path}`,
+    detail,
+    useYn: 'Y',
   };
 
-  const product = Product(data);
+  const notice = Notice(data);
 
-  product.save(err => {
+  notice.save(err => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({ success: true });
   });
 };
 
-export const addDetailImgController = (req, res) => {
+export const addNoticeImgController = (req, res) => {
   const imgFile = req.file;
   //   console.log(req);
   if (!imgFile) {
@@ -42,8 +31,8 @@ export const addDetailImgController = (req, res) => {
   return res.json(imgFile.path);
 };
 
-export const getProductController = (req, res) => {
-  Product.find((err, result) => {
+export const getNoticeController = (req, res) => {
+  Notice.find((err, result) => {
     if (result.length === 0) {
       return res.json({
         success: false,
@@ -54,10 +43,22 @@ export const getProductController = (req, res) => {
   });
 };
 
-export const getProductDetail = (req, res) => {
+export const getNoticeDetail = (req, res) => {
   const { id } = req.query;
-  console.log(req.query);
-  Product.findOne({ _id: id }, (err, result) => {
+  Notice.findOne({ _id: id }, (err, result) => {
+    if (result.length === 0) {
+      return res.json({
+        success: false,
+        message: '조회된 결과가 없습니다',
+      });
+    }
+    return res.json(result);
+  });
+};
+
+export const setNoticeUse = (req, res) => {
+  const { _id, useYn } = req.body;
+  Notice.updateOne({ _id }, { $set: { useYn } }, (err, result) => {
     if (result.length === 0) {
       return res.json({
         success: false,

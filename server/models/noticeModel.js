@@ -13,7 +13,7 @@ const noticeSchema = mongoose.Schema({
     required: true,
   },
   useYn: {
-    type: Boolean,
+    type: String,
   },
 });
 

@@ -6,6 +6,9 @@ const productSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  thumbnail: {
+    type: String,
+  },
   gerne: {
     type: String,
     required: true,

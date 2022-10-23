@@ -6,16 +6,14 @@ const categorySchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  subCode: [
-    {
-      title: {
-        type: String,
-      },
-      useYn: {
-        type: Boolean,
-      },
-    },
-  ],
+  subCode: {
+    type: String,
+    required: true,
+  },
+  useYn: {
+    type: String,
+    required: true,
+  },
 });
 
 const Category = mongoose.model('Category', categorySchema);
